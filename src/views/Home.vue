@@ -114,9 +114,9 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-6 gap-4">
+    <div v-if="todos.todos.length" class="grid grid-cols-6 gap-4">
       <TodoItem
-        v-for="todo in todos"
+        v-for="todo in todos.todos"
         :key="todo.id"
         :todo="todo"
         @delete-todo="reloadTodos"
@@ -130,7 +130,10 @@
 import TodoItem from "../components/TodoItem.vue"
 import { ref, reactive } from "vue"
 
-const todos = reactive(JSON.parse(localStorage.getItem("todos")) || [])
+const todosStorage = JSON.parse(localStorage.getItem("todos") || "[]")
+const todos = reactive({
+  todos: todosStorage.length ? todosStorage : [],
+})
 
 const newTodo = reactive({
   id: generateUUID(),
@@ -146,9 +149,9 @@ const hidePersonal = ref(false)
 const hideHome = ref(false)
 
 const reloadTodos = () => {
-  todos = JSON.parse(localStorage.getItem("todos") || "[]")
+  todos.todos = JSON.parse(localStorage.getItem("todos") || "[]")
 
-  todos = todos.filter((todo) => {
+  todos.todos = todos.todos.filter((todo) => {
     if (hideDone.value && todo.completed) return false
     if (hideWork.value && todo.category === "work") return false
     if (hidePersonal.value && todo.category === "personal") return false
@@ -159,17 +162,15 @@ const reloadTodos = () => {
 }
 
 const addTodo = () => {
-  todos.push({ ...newTodo })
+  todos.todos.push({ ...newTodo })
 
-  newTodo = {
-    id: generateUUID(),
-    title: "",
-    description: "",
-    category: "select",
-    completed: false,
-  }
+  newTodo.id = generateUUID()
+  newTodo.title = ""
+  newTodo.description = ""
+  newTodo.category = "select"
+  newTodo.completed = false
 
-  localStorage.setItem("todos", JSON.stringify(todos))
+  localStorage.setItem("todos", JSON.stringify(todos.todos))
 }
 
 function generateUUID() {
