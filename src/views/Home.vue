@@ -130,7 +130,7 @@
 import TodoItem from "../components/TodoItem.vue"
 import { ref, reactive } from "vue"
 
-const todos = ref(JSON.parse(localStorage.getItem("todos")) || [])
+const todos = reactive(JSON.parse(localStorage.getItem("todos")) || [])
 
 const newTodo = reactive({
   id: generateUUID(),
@@ -146,9 +146,9 @@ const hidePersonal = ref(false)
 const hideHome = ref(false)
 
 const reloadTodos = () => {
-  todos.value = JSON.parse(localStorage.getItem("todos") || "[]")
+  todos = JSON.parse(localStorage.getItem("todos") || "[]")
 
-  todos.value = todos.value.filter((todo) => {
+  todos = todos.filter((todo) => {
     if (hideDone.value && todo.completed) return false
     if (hideWork.value && todo.category === "work") return false
     if (hidePersonal.value && todo.category === "personal") return false
@@ -159,9 +159,9 @@ const reloadTodos = () => {
 }
 
 const addTodo = () => {
-  todos.value.push({ ...newTodo.value })
+  todos.push({ ...newTodo })
 
-  newTodo.value = {
+  newTodo = {
     id: generateUUID(),
     title: "",
     description: "",
@@ -169,7 +169,7 @@ const addTodo = () => {
     completed: false,
   }
 
-  localStorage.setItem("todos", JSON.stringify(todos.value))
+  localStorage.setItem("todos", JSON.stringify(todos))
 }
 
 function generateUUID() {

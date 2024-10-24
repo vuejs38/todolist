@@ -37,8 +37,8 @@ const changeAvatar = (event: Event) => {
     const reader = new FileReader()
 
     reader.onload = (e) => {
-      userFromStorage.value.avatar_url = e.target?.result
-      localStorage.setItem("user", JSON.stringify(userFromStorage.value))
+      userFromStorage.avatar_url = e.target?.result
+      localStorage.setItem("user", JSON.stringify(userFromStorage))
     }
 
     reader.readAsDataURL(file)
