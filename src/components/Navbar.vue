@@ -15,16 +15,9 @@
         </router-link>
       </div>
     </div>
-
-    {{ state }}
   </div>
 </template>
 
 <script setup lang="ts">
-import { store } from "../store.js"
-import { computed } from "vue"
-
-const { state } = store()
-
-const userFromStorage = JSON.parse(localStorage.getItem("user"))
+const userFromStorage = JSON.parse(localStorage.getItem("user") || "{}")
 </script>

@@ -23,13 +23,11 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, computed } from "vue"
-import { store } from "../store.js"
-const { state, setUser } = store()
+import { reactive } from "vue"
 
 const emit = defineEmits()
 
-const userFromStorage = reactive(state.user)
+const userFromStorage = reactive(JSON.parse(localStorage.getItem("user") || "{}"))
 
 const changeAvatar = (event: Event) => {
   const target = event.target as HTMLInputElement

@@ -53,7 +53,7 @@ const deleteTodo = () => {
 
 const updateTodoCompletion = () => {
   const oldTodos = JSON.parse(localStorage.getItem("todos") || "[]")
-  const newTodos = oldTodos.map((todo) => {
+  const newTodos = oldTodos.map((todo: any) => {
     if (todo.id === props.todo.id) todo.completed = !todo.completed
 
     return todo
