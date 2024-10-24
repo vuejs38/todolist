@@ -67,7 +67,16 @@
       </div>
 
       <div class="flex items-center space-x-4 justify-center">
-        <button class="btn-danger" @click="modifiedUser.user = user.user">
+        <button
+          class="btn-danger"
+          @click="
+            modifiedUser.user = {
+              ...user.user,
+              password: '',
+              passwordConfirm: '',
+            }
+          "
+        >
           Cancel
         </button>
         <button class="btn-primary" @click="setUser(modifiedUser.user)">
@@ -92,9 +101,9 @@ const user = reactive({
 
 const modifiedUser = reactive({
   user: {
-    firstname: "",
-    lastname: "",
-    email: "",
+    firstname: user.user.firstname,
+    lastname: user.user.lastname,
+    email: user.user.email,
     password: "",
     passwordConfirm: "",
   },
