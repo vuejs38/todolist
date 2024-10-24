@@ -6,7 +6,7 @@ const state = reactive({
   user: user,
 })
 
-function setUser(newValue) {
+function setUser(newValue: any) {
   localStorage.setItem("user", JSON.stringify(newValue))
   state.user = newValue
 }

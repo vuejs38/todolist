@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-between w-full p-4">
+  <div class="flex justify-around w-full p-4">
     <div class="flex flex-col space-y-6">
       <img
         :src="user.user.avatar_url"
@@ -15,7 +15,7 @@
       />
     </div>
 
-    <div class="flex flex-col space-y-4">
+    <div class="flex flex-col space-y-4 w-1/3">
       <div class="flex flex-col space-y-1">
         <label for="firstname">Firstname</label>
         <input
@@ -66,19 +66,21 @@
         />
       </div>
 
-      <button class="btn-danger" @click="modifiedUser.user = user.user">
-        Cancel
-      </button>
-      <button class="btn-primary" @click="setUser(modifiedUser.user)">
-        Update
-      </button>
+      <div class="flex items-center space-x-4 justify-center">
+        <button class="btn-danger" @click="modifiedUser.user = user.user">
+          Cancel
+        </button>
+        <button class="btn-primary" @click="setUser(modifiedUser.user)">
+          Update
+        </button>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { reactive } from "vue"
-import { store } from "../store.js"
+import { store } from "../store"
 
 const { state, setUser } = store()
 

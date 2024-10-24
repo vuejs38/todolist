@@ -19,8 +19,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from "vue"
-import { store } from "../store.js"
+import { store } from "../store"
 
 const { state } = store()
 </script>
