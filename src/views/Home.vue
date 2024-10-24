@@ -130,7 +130,7 @@
 import TodoItem from "../components/TodoItem.vue"
 import { ref, reactive } from "vue"
 
-const todos = reactive(JSON.parse(localStorage.getItem("todos")) || [])
+const todos = ref(JSON.parse(localStorage.getItem("todos")) || [])
 
 const newTodo = reactive({
   id: generateUUID(),
