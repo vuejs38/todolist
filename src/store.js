@@ -2,15 +2,12 @@ import { reactive } from "vue"
 
 const user = JSON.parse(localStorage.getItem("user") || "{}")
 
-const debug = true
-
 const state = reactive({
   user: user,
 })
 
 function setUser(newValue) {
-  if (debug) console.log("setMessage triggered with ", newValue)
-
+  localStorage.setItem("user", JSON.stringify(newValue))
   state.user = newValue
 }
 

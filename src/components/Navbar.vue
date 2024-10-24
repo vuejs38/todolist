@@ -5,7 +5,7 @@
       <div class="flex items-center space-x-6">
         <router-link to="/profile">
           <img
-            :src="userFromStorage.avatar_url"
+            :src="state.user.avatar_url"
             alt="avatar"
             class="w-10 h-10 rounded-full"
           />
@@ -19,5 +19,8 @@
 </template>
 
 <script setup lang="ts">
-const userFromStorage = JSON.parse(localStorage.getItem("user") || "{}")
+import { reactive } from "vue"
+import { store } from "../store.js"
+
+const { state } = store()
 </script>
