@@ -5,7 +5,7 @@
       <div class="flex items-center space-x-6">
         <router-link to="/profile">
           <img
-            :src="state.user.avatar_url"
+            :src="state.user.avatar_url || 'https://via.placeholder.com/150'"
             alt="avatar"
             class="w-10 h-10 rounded-full"
           />

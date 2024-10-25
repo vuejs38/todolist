@@ -2,7 +2,7 @@
   <div class="flex justify-around w-full p-4">
     <div class="flex flex-col space-y-6">
       <img
-        :src="user.user.avatar_url"
+        :src="user.user.avatar_url || 'https://via.placeholder.com/150'"
         alt="avatar"
         class="rounded-full h-72 w-72 border border-gray-300"
       />
